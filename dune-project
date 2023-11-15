@@ -7,20 +7,38 @@
 (source
  (github username/reponame))
 
-(authors "Author Name")
+(authors "Marcos Oliveira")
 
-(maintainers "Maintainer Name")
+(maintainers "Marcos Oliveira")
 
-(license LICENSE)
+(implicit_transitive_deps false)
 
-(documentation https://url/to/documentation)
+(license MIT)
 
 (package
  (name tmux_conf)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml dune)
+ (synopsis "Manage your tmux.conf using JSON or TOML files")
+ (description "Manage your tmux.conf using JSON or TOML files")
+(source
+ (github bettervim/tmux_conf))
+
+ (depends 
+   (ocaml  (= 5.1.0))
+   dune 
+   stdio
+   result
+   base
+   core
+   (yojson  (>= 1.6.0))
+   (ppx_deriving_yojson (= 3.7.0) )
+
+  ;;Dev-only
+  (ocamlformat
+   (and (= 0.26.1)
+      :with-test))
+    (ocaml-lsp-server :with-test)
+ )
  (tags
-  (topics "to describe" your project)))
+  (topics tmux "tmux.conf" "tmux-json")))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

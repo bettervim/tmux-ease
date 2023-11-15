@@ -1,5 +1,5 @@
 (executable
  (public_name tmux_conf)
  (name main)
- (libraries yojson core ppx_deriving_yojson.runtime)
+ (libraries yojson core stdio base ppx_deriving_yojson.runtime result)
  (preprocess (pps ppx_deriving_yojson)))
