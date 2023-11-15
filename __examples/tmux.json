@@ -1,0 +1,11 @@
+{
+  "prefix": [],
+  "binds": [
+    {
+      "key": [
+        "l"
+      ],
+      "command": "select-pane -R"
+    }
+  ]
+}
