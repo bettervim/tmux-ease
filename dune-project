@@ -29,6 +29,7 @@
    result
    base
    core
+   re
    (yojson  (>= 1.6.0))
    (ppx_deriving_yojson (= 3.7.0) )
 

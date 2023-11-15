@@ -1,9 +1,9 @@
 exception InvalidKey of string
 
-let filename = "/Users/admin/projects/tmux_conf/__examples/tmux.json"
+let filename = "/Users/admin/projects/tmux-json/__examples/tmux.json"
 
 let filename_output =
-  "/Users/admin/projects/tmux_conf/__examples/generated-tmux.conf"
+  "/Users/admin/projects/tmux-json/__examples/generated-tmux.conf"
 
 module TmuxConfig = struct
   type bind = {key: string list; command: string} [@@deriving yojson]
@@ -13,12 +13,20 @@ module TmuxConfig = struct
   type t = {prefix: string list option; binds: binds option} [@@deriving yojson]
 end
 
-module Command = struct
-  let from_string _ = ""
-end
-
 module Keys = struct
-  type t = Ctrl | Shift | A | G
+  type t =
+    | Ctrl
+    | Shift
+    | AlphabeticLowerCase of string
+    | AlphabeticUpperCase of string
+
+  let is_lowercase_alpha key =
+    let regex = "^[a-z]$" |> Re.Pcre.re |> Re.compile in
+    Re.Pcre.pmatch ~rex:regex key
+
+  let is_uppercase_alpha key =
+    let regex = "^[A-Z]$" |> Re.Pcre.re |> Re.compile in
+    Re.Pcre.pmatch ~rex:regex key
 
   let from_string raw_key =
     match raw_key with
@@ -26,10 +34,10 @@ module Keys = struct
         Ctrl
     | "shift" ->
         Shift
-    | "a" ->
-        A
-    | "g" ->
-        G
+    | key when is_lowercase_alpha key ->
+        AlphabeticLowerCase key
+    | key when is_uppercase_alpha key ->
+        AlphabeticUpperCase key
     | key ->
         raise (InvalidKey ("⚠️  Invalid key provided: " ^ key))
 end
@@ -48,10 +56,10 @@ module Printer = struct
               "C"
           | Shift ->
               "S"
-          | A ->
-              "a"
-          | G ->
-              "g"
+          | AlphabeticLowerCase raw_key ->
+              raw_key
+          | AlphabeticUpperCase raw_key ->
+              raw_key
         in
         let prefix = match acc with "" -> acc | _ -> acc ^ "-" in
         prefix ^ parsed_key )
@@ -79,14 +87,13 @@ module Printer = struct
     Core.Out_channel.write_all filename_output ~data:content
 end
 
-let main =
-  let json = Yojson.Safe.from_file filename in
-  let parsed = TmuxConfig.of_yojson json in
+let json = Yojson.Safe.from_file filename
+
+let parsed = TmuxConfig.of_yojson json
+
+let _ =
   match parsed with
   | Ok config -> (
     try Printer.print config with InvalidKey message -> print_endline message )
   | Error error ->
       print_endline ("⚠️  Error whilte trying to parse tmux.json: " ^ error)
-;;
-
-main
