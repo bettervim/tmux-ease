@@ -38,6 +38,14 @@ module Keys = struct
 end
 
 module Printer = struct
+  module Keywords = struct
+    let bind ~key ~command =
+      Core.String.concat ~sep:" " [ "bind"; key; command ]
+
+    let set_global_option ~name ~value =
+      Core.String.concat ~sep:" " [ "set -g"; name; value ]
+  end
+
   let append_line content new_line = content ^ "\n" ^ new_line
 
   let append_lines content lines =
@@ -57,12 +65,12 @@ module Printer = struct
 
   let generate_prefix_bind (prefix_keys : string list) =
     let key = generate_key prefix_keys in
-    "set -g prefix " ^ key
+    Keywords.set_global_option ~name:"prefix" ~value:key
 
   let generate_binds (binds : TmuxConfig.binds) =
     Core.List.map binds ~f:(fun bind ->
         let key = generate_key bind.key in
-        "bind " ^ key ^ " " ^ bind.command)
+        Keywords.bind ~key ~command:bind.command)
     |> Core.List.fold ~init:"" ~f:(fun lines bind -> append_line lines bind)
 
   let print (config : TmuxConfig.t) =
