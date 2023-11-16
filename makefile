@@ -1,6 +1,6 @@
 .PHONY: run
 run:
-	dune build && ./_build/default/bin/main.exe __examples/tmux.json __examples/generated-tmux.conf
+	dune build && ./_build/default/bin/main.exe __e2e/tmux.json __e2e/generated-tmux.conf
 
 eval-opam:
 	eval $(opam config env)
