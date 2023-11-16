@@ -1,0 +1,33 @@
+prefix = ["ctrl", "a"]
+
+[[binds]]
+  key = ["h"]
+  command = "select-pane -L"
+
+[[binds]]
+  key = ["l"]
+  command = "select-pane -R"
+
+[[binds]]
+  key = ["k"]
+  command = "select-pane -U"
+
+[[binds]]
+  key = ["j"]
+  command = "select-pane -D"
+
+[[binds]]
+  key = ["J"]
+  command = "resize-pane -D 15"
+
+[[binds]]
+  key = ["K"]
+  command = "resize-pane -U 15"
+
+[[binds]]
+  key = ["H"]
+  command = "resize-pane -L 15"
+
+[[binds]]
+  key = ["L"]
+  command = "resize-pane -R 15"
