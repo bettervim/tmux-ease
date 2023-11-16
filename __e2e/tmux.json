@@ -6,9 +6,43 @@
   "binds": [
     {
       "key": [
-        "g"
+        "h"
+      ],
+      "command": "select-pane -L"
+    },
+    {
+      "key": [
+        "l"
       ],
       "command": "select-pane -R"
+    },
+    {
+      "key": [
+        "k"
+      ],
+      "command": "select-pane -U"
+    },
+    {
+      "key": [
+        "j"
+      ],
+      "command": "select-pane -D"
+    },
+    {
+      "key": ["J"],
+      "command": "resize-pane -D 15"
+    },
+    {
+      "key": ["K"],
+      "command": "resize-pane -U 15"
+    },
+    {
+      "key": ["H"],
+      "command": "resize-pane -L 15"
+    },
+    {
+      "key": ["L"],
+      "command": "resize-pane -R 15"
     }
   ]
 }
