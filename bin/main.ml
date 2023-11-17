@@ -3,9 +3,9 @@ let main () =
   let config_result = TmuxConfig.from_file config_filename in
   match config_result with
   | Ok config -> (
-      Printer.(
-        try Printer.print config
-        with InvalidKey message -> print_endline message))
+      try Printer.print config
+      with _ ->
+        print_endline ("⚠️  Error whilte trying to parse: " ^ config_filename))
   | Error error ->
       print_endline ("⚠️  Error whilte trying to parse tmux.json: " ^ error)
 ;;
