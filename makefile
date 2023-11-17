@@ -1,5 +1,5 @@
 run:
-	dune build && ./_build/default/bin/main.exe e2e/tmux.json e2e/tmux.conf
+	dune build && ./_build/default/bin/main.exe e2e/tmux.toml e2e/tmux.conf
 
 eval-opam:
 	eval $(opam config env)

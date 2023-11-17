@@ -1,4 +1,4 @@
-prefix = ["ctrl", "a"]
+prefix = ["ctrl", "b"]
 
 [[binds]]
   key = ["h"]
