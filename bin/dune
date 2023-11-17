@@ -3,3 +3,5 @@
  (name main)
  (libraries toml yojson core stdio base ppx_deriving_yojson.runtime result re)
  (preprocess (pps ppx_deriving_yojson)))
+
+(include_subdirs unqualified)

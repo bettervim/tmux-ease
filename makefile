@@ -12,3 +12,7 @@ create-switch:
 .PHONY: install
 install: 
 	opam install . --deps-only --with-test --with-doc
+
+.PHONY: build
+build:
+	dune build
