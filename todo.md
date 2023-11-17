@@ -1,5 +1,5 @@
 ## Features
-- [ ] Support for `.toml`
+- [x] Support for `.toml`
 - [ ] Improve command experience
     - [ ] Validate command name
     - [ ] Validate command arguments

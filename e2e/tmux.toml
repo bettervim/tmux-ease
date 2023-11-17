@@ -1,5 +1,12 @@
 prefix = ["ctrl", "b"]
 
+[[options]]
+  history-limit = 10000
+  status-keys = "vi"
+  mode-keys = "vi"
+  set-titles = "on"
+  set-titles-string = "λ"
+
 [[binds]]
   key = ["h"]
   command = "select-pane -L"

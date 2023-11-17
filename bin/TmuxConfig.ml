@@ -1,10 +1,23 @@
 exception InvalidTomlConfiguration of string
 exception InvalidFileFormat of string
 
+type options = {
+  historyLimit : int option;
+  statusKeys : string option;
+  modeKeys : string option;
+  setTitles : string option;
+  setTitlesString : string option;
+}
+[@@deriving yojson]
+
 type bind = { key : string list; command : string } [@@deriving yojson]
 type binds = bind list [@@deriving yojson]
 
-type t = { prefix : string list option; binds : binds option }
+type t = {
+  prefix : string list option;
+  binds : binds option;
+  options : options;
+}
 [@@deriving yojson]
 
 module TomlParser = struct
@@ -37,6 +50,15 @@ module TomlParser = struct
     let open Toml.Lenses in
     let raw_binds = get data (key "binds" |-- array |-- tables) in
     raw_binds |> Core.Option.map ~f:(Core.List.map ~f:bind)
+
+  let options data =
+    let open Toml.Lenses in
+    let historyLimit = get data (key "history-limit" |-- int) in
+    let statusKeys = get data (key "status-keys" |-- string) in
+    let modeKeys = get data (key "mode-keys" |-- string) in
+    let setTitles = get data (key "set-titles" |-- string) in
+    let setTitlesString = get data (key "set-titles-string" |-- string) in
+    { statusKeys; historyLimit; modeKeys; setTitles; setTitlesString }
 end
 
 let from_json filename =
@@ -49,7 +71,11 @@ let from_toml filename =
   match result with
   | `Ok data ->
       Result.Ok
-        { prefix = TomlParser.prefix data; binds = TomlParser.binds data }
+        {
+          prefix = TomlParser.prefix data;
+          binds = TomlParser.binds data;
+          options = TomlParser.options data;
+        }
   | `Error (_, _) -> Result.Error "Failed to parse"
 
 let from_file filename =
