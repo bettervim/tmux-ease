@@ -2,6 +2,12 @@
 Simplify your tmux life with TOML and JSON configuration. Less fuss, more coding.
 > 💡 Work in progress—like that side project you swear you'll finish someday.
 
+## Installation
+Run the following command in your terminal:
+```sh
+curl -sSL https://raw.githubusercontent.com/bettervim/tmux-ease/main/scripts/install.sh | bash
+```
+
 ## Basic usage
 1. Create a `~/tmux.toml` file (or `.json` if you want):
 ```sh
@@ -26,12 +32,17 @@ prefix = ["ctrl", "b"]
 ```
 > Feel free to modify these options.
 
-2. Paste the following command at the bottom of you `tmux.conf`:
+3. Paste the following command at the bottom of you `tmux.conf`:
 ```sh
 tmux-ease ~/tmux.toml ~/tmux-ease.conf
 source ~/tmux-ease.conf
 ```
-3. Reload your tmux, and there you have it!
+4. Reload your tmux, and there you have it!
+
+## Uninstalling
+```
+curl -sSL https://raw.githubusercontent.com/bettervim/tmux-ease/main/scripts/uninstall.sh | bash
+```
 
 ## License
 MIT
