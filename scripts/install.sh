@@ -3,7 +3,7 @@
 
 # Set the GitHub repository, executable name, and download URL
 repository="bettervim/tmux-ease"
-executable_name="tmux-ease.exe"
+executable_name="tmux-ease"
 download_url="https://github.com/$repository/releases/latest/download/$executable_name"
 
 # Set the destination directory in the PATH
