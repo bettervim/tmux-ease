@@ -1,6 +1,6 @@
 (lang dune 3.11)
 
-(name tmux_conf)
+(name tmux_ease)
 
 (generate_opam_files true)
 
@@ -16,7 +16,7 @@
 (license MIT)
 
 (package
- (name tmux_conf)
+ (name tmux_ease)
  (synopsis "Manage your tmux.conf using JSON or TOML files")
  (description "Manage your tmux.conf using JSON or TOML files")
 (source
