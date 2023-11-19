@@ -31,11 +31,10 @@ module Keywords = struct
     Core.String.concat ~sep:" " [ "set -g"; name; value ]
 end
 
-let append_line content new_line = match content  with 
-   | "" -> new_line
-   | _ ->  content ^ "\n" ^ new_line
+let append_line content new_line =
+  match content with "" -> new_line | _ -> content ^ "\n" ^ new_line
 
-let lines_to_string lines = Core.List.fold lines ~init: "" ~f:append_line
+let lines_to_string lines = Core.List.fold lines ~init:"" ~f:append_line
 
 let generate_key keys =
   Core.List.fold keys ~init:"" ~f:(fun acc current_key ->
@@ -73,7 +72,7 @@ let generate_options (options : TmuxConfig.options) =
     g_option "set-titles-string" options.setTitlesString;
     g_option "mode-keys" options.modeKeys;
     g_option "status-keys" options.statusKeys;
-  ] 
+  ]
   |> lines_to_string
 
 let print (config : TmuxConfig.t) =

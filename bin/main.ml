@@ -7,7 +7,7 @@ let main () =
       with _ ->
         print_endline ("⚠️  Error whilte trying to parse: " ^ config_filename))
   | Error error ->
-      print_endline ("⚠️  Error whilte trying to parse tmux.json: " ^ error)
+      print_endline ("⚠️  Error whilte trying to parse: " ^ error)
 ;;
 
 main ()
