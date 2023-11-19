@@ -28,8 +28,8 @@ prefix = ["ctrl", "b"]
 
 2. Paste the following command at the bottom of you `tmux.conf`:
 ```sh
-tmux-ease ~/tmux.toml
-source `/tmux-ease.conf
+tmux-ease ~/tmux.toml ~/tmux-ease.conf
+source ~/tmux-ease.conf
 ```
 3. Reload your tmux, and there you have it!
 
