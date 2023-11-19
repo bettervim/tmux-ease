@@ -7,7 +7,7 @@ executable_name="tmux-ease"
 download_url="https://github.com/$repository/releases/latest/download/$executable_name"
 
 # Set the destination directory in the PATH
-destination_directory="/usr/local/bin"
+destination_directory="/usr/local/bin/"
 
 # Download the executable from the latest release
 wget -O "$executable_name" "$download_url"

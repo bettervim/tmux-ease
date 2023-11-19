@@ -34,8 +34,8 @@ prefix = ["ctrl", "b"]
 
 3. Paste the following command at the bottom of you `tmux.conf`:
 ```sh
-tmux-ease ~/tmux.toml ~/tmux-ease.conf
-source ~/tmux-ease.conf
+run-shell "tmux-ease ~/tmux.toml ~/tmux-ease.conf"
+source-file ~/tmux-ease.conf
 ```
 4. Reload your tmux, and there you have it!
 
