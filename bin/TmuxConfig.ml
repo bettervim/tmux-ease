@@ -53,12 +53,23 @@ module TomlParser = struct
 
   let options data =
     let open Toml.Lenses in
-    let historyLimit = get data (key "history-limit" |-- int) in
-    let statusKeys = get data (key "status-keys" |-- string) in
-    let modeKeys = get data (key "mode-keys" |-- string) in
-    let setTitles = get data (key "set-titles" |-- string) in
-    let setTitlesString = get data (key "set-titles-string" |-- string) in
-    { statusKeys; historyLimit; modeKeys; setTitles; setTitlesString }
+    let table_opts = get data (key "options" |-- table) in
+    match table_opts with
+    | None ->
+        {
+          statusKeys = None;
+          historyLimit = None;
+          modeKeys = None;
+          setTitles = None;
+          setTitlesString = None;
+        }
+    | Some table ->
+        let historyLimit = get table (key "history-limit" |-- int) in
+        let statusKeys = get table (key "status-keys" |-- string) in
+        let modeKeys = get table (key "mode-keys" |-- string) in
+        let setTitles = get table (key "set-titles" |-- string) in
+        let setTitlesString = get table (key "set-titles-string" |-- string) in
+        { statusKeys; historyLimit; modeKeys; setTitles; setTitlesString }
 end
 
 let from_json filename =

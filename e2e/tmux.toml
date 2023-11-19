@@ -1,6 +1,6 @@
 prefix = ["ctrl", "b"]
 
-[[options]]
+[options]
   history-limit = 10000
   status-keys = "vi"
   mode-keys = "vi"
